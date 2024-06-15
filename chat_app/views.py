@@ -12,28 +12,28 @@ class ChatSignupView(APIView):
     def post(self, request):
 
         serializer = ChatUserSerializer(data=request.data)
-        try:
-            if serializer.is_valid():
-                new_chat_user = serializer.save()
-                response = {
-                    "message": "User created successfully.",
-                    "user_id": new_chat_user.id,
-                    "name": new_chat_user.name,
-                    "email": new_chat_user.email,
-                    "phone": new_chat_user.phone,
-                }
+        # try:
+        if serializer.is_valid():
+            new_chat_user = serializer.save()
+            response = {
+                "message": "User created successfully.",
+                "user_id": new_chat_user.id,
+                "name": new_chat_user.name,
+                "email": new_chat_user.email,
+                "phone": new_chat_user.phone,
+            }
 
-                return Response(response, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except IntegrityError:
-            return Response(
-                {"error": "User already exists."}, status=status.HTTP_400_BAD_REQUEST
-            )
-        except Exception as e:
-            return Response(
-                {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+            return Response(response, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # except IntegrityError:
+        #     return Response(
+        #         {"error": "User already exists."}, status=status.HTTP_400_BAD_REQUEST
+        #     )
+        # except Exception as e:
+        #     return Response(
+        #         {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        #     )
 
 
 class ChatLoginView(APIView):

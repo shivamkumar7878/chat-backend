@@ -33,7 +33,7 @@ DB_PASSWORD = config("DB_PASSWORD")
 DB_NAME = config("DB_NAME")
 
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1",'localhost']
 
 
 # Application definition
